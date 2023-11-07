@@ -37,6 +37,7 @@ public class CarStatus extends AuditTime implements Serializable {
     @Column(name = "car_rental_option")
     private CarRentalOption carRentalOption;
 
+
     @Column(name = "active")
     private boolean active;
 }

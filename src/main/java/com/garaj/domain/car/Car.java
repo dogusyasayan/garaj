@@ -51,7 +51,7 @@ public class Car extends AuditTime implements Serializable {
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "car_id", referencedColumnName = "id")
-    private Set<CarStatus> carStatuses = new HashSet<>();
+    private Set<CarStatus> statuses = new HashSet<>();
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "color_id", referencedColumnName = "id")
