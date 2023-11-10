@@ -16,6 +16,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -34,10 +35,29 @@ public class CarStatus extends AuditTime implements Serializable {
     private Long carId;
 
     @Enumerated(value = EnumType.STRING)
-    @Column(name = "car_rental_option")
     private CarRentalOption carRentalOption;
-
 
     @Column(name = "active")
     private boolean active;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        CarStatus carStatus = (CarStatus) o;
+        return Objects.equals(this.hashCode(), carStatus.hashCode());
+    }
+
+    @Override
+    public int hashCode() {
+        if (isActive()) {
+            return Objects.hash(carRentalOption, active);
+        }
+        return Objects.hash(id);
+    }
 }
+

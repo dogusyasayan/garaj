@@ -1,6 +1,9 @@
-package com.garaj.domain.rental;
+package com.garaj.domain.location;
 
+import com.garaj.domain.image.Image;
 import com.garaj.domain.timestamp.AuditTime;
+import com.garaj.model.enums.CarType;
+import com.garaj.model.enums.location.LocationOption;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -8,7 +11,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,32 +18,20 @@ import lombok.Setter;
 import java.io.Serializable;
 import java.util.Objects;
 
-@Entity
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-@Builder
-@Table(name = "rental", schema = "rental_schema")
-public class Rental extends AuditTime implements Serializable {
-
+@AllArgsConstructor
+@Entity
+@Table(name = "location", schema = "location_schema")
+public class Location extends AuditTime implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    private Long carId;
-
-    private Long customerId;
-
-    @Column(name = "rentup_date")
-    private int rentUpDate;
-
-    @Column(name = "return_date")
-    private int returnDate;
-
-    @Column(name = "rental_date")
-    private int rentalDate;
+    @Column(name = "car_type")
+    private LocationOption locationOption;
 
     @Override
     public boolean equals(Object o) {
@@ -51,8 +41,8 @@ public class Rental extends AuditTime implements Serializable {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Rental rental = (Rental) o;
-        return Objects.equals(id, rental.id);
+        Location location = (Location) o;
+        return Objects.equals(id, location.id);
     }
 
     @Override

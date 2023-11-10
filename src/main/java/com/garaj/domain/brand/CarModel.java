@@ -1,4 +1,4 @@
-package com.garaj.domain.rental;
+package com.garaj.domain.brand;
 
 import com.garaj.domain.timestamp.AuditTime;
 import jakarta.persistence.Column;
@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,26 +23,19 @@ import java.util.Objects;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "rental", schema = "rental_schema")
-public class Rental extends AuditTime implements Serializable {
+@Table(name = "car_model", schema = "brand_schema")
+public class CarModel extends AuditTime implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    private Long carId;
+    @Column(name = "model_name")
+    private String modelName;
 
-    private Long customerId;
-
-    @Column(name = "rentup_date")
-    private int rentUpDate;
-
-    @Column(name = "return_date")
-    private int returnDate;
-
-    @Column(name = "rental_date")
-    private int rentalDate;
+    @ManyToOne
+    private Brand brand;
 
     @Override
     public boolean equals(Object o) {
@@ -51,8 +45,8 @@ public class Rental extends AuditTime implements Serializable {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Rental rental = (Rental) o;
-        return Objects.equals(id, rental.id);
+        CarModel carModel = (CarModel) o;
+        return Objects.equals(id, carModel.id);
     }
 
     @Override

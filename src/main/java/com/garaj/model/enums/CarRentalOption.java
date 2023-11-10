@@ -1,7 +1,8 @@
 package com.garaj.model.enums;
 
 public enum CarRentalOption {
-    DAILY,
-    MONTHLY,
-    YEARLY
+    AVAILABLE,
+    DAILY_RENTAL,
+    MONTHLY_RENTAL,
+    YEARLY_RENTAL
 }
